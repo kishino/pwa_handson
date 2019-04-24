@@ -4,3 +4,4 @@ node_modules/
 .node-version
 application-server-keys.json
 token.json
+.idea/
