@@ -5,7 +5,7 @@
     return;
   }
   // KEYを生成した公開鍵に書き換えます
-  const key = 'KEY';
+  const key = 'BO0HxgNy1H-QWBb9ufunvbrcKsTN0ioMDwkk4k03UlEBIIG9k2KCmqn8DQtrtlS_MNKij9PfvnxTU6w4YVpMBLY';
   if (key === 'KEY') {
     alert('KEYを書き換えてください');
     return;

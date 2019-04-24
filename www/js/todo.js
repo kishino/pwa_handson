@@ -18,7 +18,7 @@ $(function() {
     __template: 'listTemplate',
     // Todoを入れておく変数
     __todos: [],
-    
+
     // DOM構築、コントローラ化が終わったタイミングで呼ばれるイベント
     // Todoの初期表示を実行
     __ready: function() {
@@ -33,7 +33,7 @@ $(function() {
         me.__todos = result;
         // 表示を更新
         me.updateView();
-        
+
         // キューを処理
         if (navigator.onLine) {
           me.executeQueue(queues);
@@ -100,12 +100,26 @@ $(function() {
         todos: this.__todos
       });
       // Service Workerのキャッシュを更新します（第5章）
+      // todo.jsの中です
+      const channel = new MessageChannel();
+      navigator.serviceWorker.controller
+        .postMessage({
+          url: DOMAIN + '/todos/' + TODO,
+          todos: me.__todos
+        }, [channel.port2]);
     },
     // Todoを追加する処理
     addTodo: function(todo) {
       return new Promise(function(res, rej) {
         // オフライン時の処理（第6章で追加）
-        
+        if (!navigator.onLine) {
+          // オフライン時の処理
+          queues.add.push(todo);
+          localStorage.setItem('addQueue', JSON.stringify(queues.add));
+          // 表示を更新
+          return res({todo: todo});
+        }
+
         // オンライン時の処理
         // サーバに登録
         $.ajax({
@@ -141,6 +155,8 @@ $(function() {
     },
     // オンライン復帰時の処理（第6章用）
     '{window} online': function(context) {
+      // 以下を追加
+      this.executeQueue(queues);
     }
   };
   h5.core.controller('.container', todoController);

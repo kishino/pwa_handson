@@ -11,7 +11,7 @@ const Datastore = require('nedb');
 const db = new Datastore({ filename: '.data/datafile', autoload: true });
 const bodyParser = require('body-parser');
 
-app.use(express.static('public'));
+app.use(express.static('www'));
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
