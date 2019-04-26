@@ -56,7 +56,7 @@ self.addEventListener('fetch', async (event) => {
         return response;
       },
       error => {
-        return caches.match(event.request);
+        return caches.match(event.request.url);
       })
     )
 });
@@ -69,7 +69,7 @@ self.addEventListener('message', function(event) {
     .then(cache => {
       // 新しいレスポンスを作る
       // レスポンスとともに、レスポンスヘッダーも指定
-      const res = new Response(JSON.stringify(event.data.todos), {
+      const res = new Response(JSON.stringify(event.data.todoResult), {
         headers: {
           'Content-Type': 'application/json'
         }
