@@ -1,6 +1,6 @@
 {
-  "short_name": "hifive Todo",
-  "name": "hifive製タスクアプリ",
+  "short_name": "Monaca UG Todo",
+  "name": "Monaca UG製タスクアプリ",
   "icons": [
     {
       "src": "icon.png",
@@ -9,8 +9,8 @@
     }
   ],
   "display": "standalone",
-  "background_color": "#468143",
+  "background_color": "#007bff",
   "orientation": "portrait",
-  "theme_color": "#468143",
+  "theme_color": "#007bff",
   "start_url": "index.html?launcher=true"
 }
