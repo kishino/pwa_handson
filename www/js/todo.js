@@ -1,6 +1,7 @@
 var TODO = 'TODO';
 var DOMAIN = 'https://cloud.raku-za.jp/stage/baas-dev/api_control';
 var TENANT_KEY = 21010
+var CREDENTIAL = 'USERNAME:PASSWORD'
 
 function getUserAccessToken() {
   return localStorage.getItem('userAccessToken')
@@ -38,6 +39,9 @@ $(function() {
         return $.ajax({
           url: DOMAIN + '/my/user_detail/get/todo',
           type: 'POST',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ('Authorization', 'Basic ' + btoa(CREDENTIAL));
+          },
           data: {
             tenant_id: TENANT_KEY,
             contents: {
@@ -76,6 +80,9 @@ $(function() {
       return $.ajax({
         url: DOMAIN + '/users/regist',
         type: 'POST',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader ('Authorization', 'Basic ' + btoa(CREDENTIAL));
+        },
         data: {
           tenant_id: TENANT_KEY,
           contents: {
@@ -175,6 +182,9 @@ $(function() {
         $.ajax({
           url: DOMAIN + '/my/user_detail/add/todo',
           type: 'POST',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ('Authorization', 'Basic ' + btoa(CREDENTIAL));
+          },
           data: {
             tenant_id: TENANT_KEY,
             contents: {
@@ -204,6 +214,9 @@ $(function() {
         $.ajax({
           url: DOMAIN + '/my/user_detail/delete/todo',
           type: 'POST',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader ('Authorization', 'Basic ' + btoa(CREDENTIAL));
+          },
           data: {
             tenant_id: TENANT_KEY,
             contents: {
