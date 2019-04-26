@@ -164,25 +164,11 @@ $(function() {
         })
       });
       // Service Workerのキャッシュを更新します（第5章）
-      // todo.jsの中です
-      const channel = new MessageChannel();
-      navigator.serviceWorker.controller
-        .postMessage({
-          url: DOMAIN + '/my/user_detail/get/todo',
-          todoResult: me.__todoResult
-        }, [channel.port2]);
     },
     // Todoを追加する処理
     addTodo: function(todo) {
       return new Promise(function(res, rej) {
         // オフライン時の処理（第6章で追加）
-        if (!navigator.onLine) {
-          // オフライン時の処理
-          queues.add.push(todo);
-          localStorage.setItem('addQueue', JSON.stringify(queues.add));
-          // 表示を更新
-          return res({todo: todo});
-        }
 
         // オンライン時の処理
         // サーバに登録
@@ -240,8 +226,6 @@ $(function() {
     },
     // オンライン復帰時の処理（第6章用）
     '{window} online': function(context) {
-      // 以下を追加
-      this.executeQueue(queues);
     }
   };
   h5.core.controller('.container', todoController);

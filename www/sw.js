@@ -50,34 +50,10 @@ self.addEventListener('activate', function(event) {
 
 // ネットワークアクセス時に使われるfetchイベント
 self.addEventListener('fetch', async (event) => {
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        return response;
-      },
-      error => {
-        return caches.match(event.request.url);
-      })
-    )
+  // ここに記述してください（第4章）
 });
 
 // Todoの一覧を更新する処理（第5章）
-// sw.jsの中です
-self.addEventListener('message', function(event) {
-  // キャッシュを開く
-  caches.open(CACHE_NAME)
-    .then(cache => {
-      // 新しいレスポンスを作る
-      // レスポンスとともに、レスポンスヘッダーも指定
-      const res = new Response(JSON.stringify(event.data.todoResult), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      // URLとレスポンスを紐付け
-      cache.put(event.data.url, res);
-    })
-});
 
 // Webプッシュ通知の処理（第7章）
 self.addEventListener('push', ev => {
